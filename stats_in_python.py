@@ -18,7 +18,7 @@ def load_data(filepath:str, column:int)->tuple[list, int]:
                 sys.exit(1)
 
             count = count + 1 
-            
+
             if value == 'NaN':
                 continue
             try: 
@@ -26,7 +26,8 @@ def load_data(filepath:str, column:int)->tuple[list, int]:
             except ValueError:
                 continue
 
-        
+            numbers.append(num)
+            
 
 
 
