@@ -18,18 +18,18 @@ def load_data(filepath:str, column:int)->tuple[list, int]:
                 sys.exit(1)
 
             count = count + 1 
-
+            
+            if value == 'NaN':
+                continue
             try: 
                 num = float(value)
-            except: ValueError
-                
-            continue
+            except ValueError:
+                continue
+
         
 
 
 
-
-    pass
 
 def calculate_average(numbers:list)->float:
     # TODO - Complete the function to return the average of the list of numbers
