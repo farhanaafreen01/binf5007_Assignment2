@@ -9,27 +9,33 @@ def load_data(filepath:str, column:int)->tuple[list, int]:
     numbers = []
     count = 0
 
-    with open (filepath, 'r') as infile:
+    with open(filepath, 'r') as infile:
         for line in infile:
+            count = count + 1
+
             try: 
-                value = line.rstrip('\n').split('\t')
+                value = line.rstrip('\n').split('\t')[column]
+                
             except IndexError: 
-                print("Exiting. The is no valid index in column", {columm} ,  "in line " ,{count+1} , "in file" , {filepath})
+                print("Exiting. The is no valid index in column",column,  "in line " , count , "in file" , filepath)
                 sys.exit(1)
 
-            count = count + 1 
-
-            if value == 'NaN':
-                continue
             try: 
                 num = float(value)
             except ValueError:
                 continue
 
+            if math.isnan(num):
+                continue
+            
+
             numbers.append(num)
 
-
-
+        if len(numbers) == 0:
+            print("Error: There are no valid numbers in column", column, "in " , filepath)
+            sys.exit(1)
+            
+    return numbers, count
 
 
 def calculate_average(numbers:list)->float:
@@ -47,7 +53,7 @@ def get_max_and_min(numbers:list)->tuple[float, float]:
     min_num = min(numbers)
     max_num = max(numbers)
 
-    return float(min_num, max_num)
+    return float(max_num) , float(min_num) 
 
     
 
@@ -72,11 +78,25 @@ def calculate_variance(numbers:list)->float:
 def calculate_std_dev(numbers:list)->float:
     # TODO - Complete the function to return the standard deviation of the numbers in the list
     
-    std_dev = math.sqrt(calculate_variance ** 2)
+    std_dev = math.sqrt(calculate_variance(numbers))
+
+    return float(std_dev)
 
 
 def calculate_median(number:list)->float:
     # TODO - Complete the function to return the median of the numbers in the list
-    pass
+    
+    sorted_num = sorted(number)
+
+    n = len(sorted_num)
+
+    middle_value = n // 2 
+
+    if n % 2 == 1: 
+        return float(sorted_num[middle_value])
+
+    else: 
+        return float((sorted_num[middle_value - 1] + sorted_num[middle_value] ) / 2 )
+
 
 
