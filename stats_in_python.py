@@ -27,27 +27,53 @@ def load_data(filepath:str, column:int)->tuple[list, int]:
                 continue
 
             numbers.append(num)
-            
+
 
 
 
 
 def calculate_average(numbers:list)->float:
     # TODO - Complete the function to return the average of the list of numbers
-    pass
+    
+    average = sum(numbers)/len(numbers)
+    
+    return float(average)  
+
+    
 
 def get_max_and_min(numbers:list)->tuple[float, float]:
     # TODO - Complete the function to return a tuple with the maximum and minimum
     # values in the list, in that order
-    pass
+    min_num = min(numbers)
+    max_num = max(numbers)
+
+    return float(min_num, max_num)
+
+    
 
 def calculate_variance(numbers:list)->float:
     # TODO - Complete the function to return the variance of the numbers in the list
-    pass
+    
+    n = len(numbers)
+
+    if n <= 1:
+        return 0.0
+
+    mean = calculate_average(numbers)
+
+    variance = 0 
+    for num in numbers:
+        variance = variance + (((num - mean) ** 2) / (n-1))
+
+    return float(variance) 
+
+
 
 def calculate_std_dev(numbers:list)->float:
     # TODO - Complete the function to return the standard deviation of the numbers in the list
-    pass
+    
+    std_dev = math.sqrt(calculate_variance ** 2)
+
 
 def calculate_median(number:list)->float:
     # TODO - Complete the function to return the median of the numbers in the list
