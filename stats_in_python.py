@@ -17,7 +17,7 @@ def load_data(filepath:str, column:int)->tuple[list, int]:
                 value = line.rstrip('\n').split('\t')[column]
                 
             except IndexError: 
-                print("Exiting. The is no valid index in column",column,  "in line " , count , "in file" , filepath)
+                print("Exiting. The is no valid 'list index'  in column",column,  "in line " , count , "in file: " , filepath)
                 sys.exit(1)
 
             try: 
@@ -32,7 +32,7 @@ def load_data(filepath:str, column:int)->tuple[list, int]:
             numbers.append(num)
 
         if len(numbers) == 0:
-            print("Error: There are no valid numbers in column", column, "in " , filepath)
+            print("Error: There were no valid number(s) in column ", column, "in file: " , filepath)
             sys.exit(1)
             
     return numbers, count
